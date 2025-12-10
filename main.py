@@ -31,8 +31,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
 # --- CONFIG ---
-APP_NAME = "Trove"
-VERSION = "v28.0"
+APP_NAME = "SmartSort AI"
+VERSION = "v28.0 (UI Fixed)"
 CONFIG_FILE = os.path.expanduser("~/smartsort_config.json")
 CHAT_HISTORY_FILE = os.path.expanduser("~/smartsort_chat_history.json")
 LOG_FILE = os.path.expanduser("~/smartsort_debug.log")
@@ -287,7 +287,7 @@ class DashboardWindow(ctk.CTk):
         
         self.main_area = ctk.CTkTabview(self)
         self.main_area.grid(row=0, column=1, padx=20, pady=20, sticky="nsew")
-        self.tab_chat = self.main_area.add("🧠 Chat with Nova")
+        self.tab_chat = self.main_area.add("🧠 Chat")
         self.tab_settings = self.main_area.add("⚙️ Settings")
 
         self.build_chat_ui()
@@ -353,7 +353,7 @@ class DashboardWindow(ctk.CTk):
             history = chats.get(self.current_chat_id, [])
             ans = self.brain.ask(msg, self.config["target_dir"], history)
             history.append({"role": "User", "text": msg})
-            history.append({"role": "Nova AI", "text": ans})
+            history.append({"role": "AI", "text": ans})
             ChatManager.save_chat(self.current_chat_id, history)
             
             self.chat_display.configure(state="normal")
